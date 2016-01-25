@@ -1,0 +1,12 @@
+{
+  "name": "phoxy/phorm",
+  "description": "ORM library for phoxy",
+  "license": "Apache-2.0",
+  "minimum-stability": "dev",
+  "require" :
+  {
+    "php": "~5.5",
+    "enelar/phpsql": "~0.0",
+    "mustangostang/spyc": "~0.5"
+  }
+}

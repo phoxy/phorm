@@ -1,0 +1,15 @@
+database:
+  - firstdb:
+      table:
+        - book:
+          field:
+            - id:
+              - integer
+              - primary
+              - unique
+              - increment
+            - title
+              - varchar:
+                - notnull
+                max: 255
+  - seconddb

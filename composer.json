@@ -6,7 +6,7 @@
   "require" :
   {
     "php": "~5.5",
-    "enelar/phpsql": "~0.0",
+    "enelar/phpsql": "~0.0.6",
     "mustangostang/spyc": "~0.5"
   }
 }

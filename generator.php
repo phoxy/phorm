@@ -1,10 +1,13 @@
 <?php namespace orm;
 
+include('vendor/enelar/phpsql/oneline.php');
+\phpsql\OneLineConfig("pgsql://postgres@localhost");
+
 include('vendor/autoload.php');
 
-include('translate/abstract.php');
+include('translate/postgresql.php');
 
-$test = new translate\AbstractTranslate();
+$test = new translate\PostgreSQL();
 
 function PopFirstObject(&$array)
 {

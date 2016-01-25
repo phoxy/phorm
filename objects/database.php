@@ -18,6 +18,8 @@ class database extends AbstractObject
   public function Create($name, $yaml, $path)
   {
     $this->con()->CreateDatabase($name, $yaml);
+    if (!$this->Exist($name))
+      throw "Failed to create $name database";
   }
 
   public function CanRecursive()

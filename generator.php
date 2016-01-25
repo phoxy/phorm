@@ -20,6 +20,20 @@ function PopFirstObject(&$array)
   return [ $key, $obj ];
 }
 
+function GetFirstObject($array)
+{
+  $copy = $array;
+  return PopFirstObject($copy);
+}
+
+function CanRecursive($object, $yaml)
+{
+  list($word, $obj) = PopFirstObject($yaml);
+
+  $can = $object->CanRecursive();
+  return in_array($word, $can);
+}
+
 include('recursive-path.php');
 
 $path = new recursivepath();
@@ -40,14 +54,15 @@ function RecursiveRead($arr)
     foreach ($objects as $settings)
     {
       list($name, $object) = PopFirstObject($settings);
+      $path->update($name);
       if ($name == null)
         break;
 
-      $path->update($name);      
       $bond = new $fulltypename($test);
       $bond->Init($name, $object, $path);
 
-      RecursiveRead($object);
+      if (CanRecursive($bond, $object))
+        RecursiveRead($object);
     }
 
     $path->pop();

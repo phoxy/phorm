@@ -8,8 +8,7 @@ database:
                 - primary
                 - unique
                 - increment
-              - title
+              - title:
                 - varchar:
-                  - notnull
-                  max: 255
-  - seconddb
+                    max: 255
+                - notnull

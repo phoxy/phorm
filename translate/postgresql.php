@@ -36,6 +36,7 @@ class postgresql
 
   public function CreateTable($path, $settings)
   {
+    \db::Query("CREATE TABLE {$path->table}");
     die('create table');
   }
 

@@ -18,6 +18,8 @@ class table extends AbstractObject
   public function Create($path, $yaml)
   {
     $this->con()->CreateTable($path, $yaml);
+    if (!$this->Exist($path))
+      die("Failed to create {$path->table} table");
   }
 
   public function CanRecursive()

@@ -22,7 +22,7 @@ class AbstractTranslate
 
   }
 
-  public function ExistFiels($settings)
+  public function ExistField($settings)
   {
     
   }

@@ -2,7 +2,7 @@
 
 require_once('abstract.php');
 
-class database extends AbstractObject
+class table extends AbstractObject
 {
   public function Init($name, $yaml, $path)
   {    
@@ -13,11 +13,11 @@ class database extends AbstractObject
 
   public function Exist($name)
   {
-    return $this->con()->ExistDatabase($name);
+    return $this->con()->ExistTable($name);
   }
 
   public function Create($name, $yaml, $path)
   {
-    $this->con()->CreateDatabase($name, $yaml);
+    $this->con()->CreateTable($name, $yaml);
   }
 }

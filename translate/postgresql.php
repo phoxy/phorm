@@ -1,16 +1,18 @@
 <?php namespace orm\translate;
 
+require_once('abstract.php');
+
 class postgresql
 {
   public function ExistDatabase($path)
   {
-    $ret = \db::Query("SELECT count(*) FROM pg_catalog.pg_database WHERE datname=$1", [$path->database], true);
+    $ret = \db::SafeQuery("SELECT count(*) FROM pg_catalog.pg_database WHERE datname=$1", [$path->database], true);
     return $ret->count;
   }
 
   public function CreateDatabase($path, $settings)
   {
-    \db::Query("CREATE DATABASE {$path->database}");
+    \db::SafeQuery("CREATE DATABASE {$path->database}");
   }
 
   public function Schema($path)
@@ -27,7 +29,7 @@ class postgresql
 
   public function ExistTable($path)
   {
-    $ret = \db::Query("SELECT EXISTS (
+    $ret = \db::SafeQuery("SELECT EXISTS (
         SELECT 1
         FROM   pg_catalog.pg_class c
         JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace
@@ -41,12 +43,12 @@ class postgresql
 
   public function CreateTable($path, $settings)
   {
-    \db::Query("CREATE TABLE {$this->Table($path)}()");
+    \db::SafeQuery("CREATE TABLE {$this->Table($path)}()");
   }
 
   public function ExistField($path)
   {
-    $ret = \db::Query("SELECT * FROM information_schema.columns
+    $ret = \db::SafeQuery("SELECT * FROM information_schema.columns
       WHERE table_schema=$1
         and table_name=$2
         and column_name=$3",
@@ -62,9 +64,24 @@ class postgresql
   public function CreateField($path, $settings)
   {
     var_dump($settings);
+    $type = "varchar";
 
-    var_dump("ALTER TABLE {$this->Table($path)}
-      ADD COLUMN {$path->field}");
+    if (!in_array($settings[0], AbstractTranslate::$types))
+      $type = $settings[0];
+
+    $append = "";
+    if (in_array("primary", $settings))
+      $append .= "ALTER TABLE {$this->Table($path)} ADD PRIMARY KEY ($path->field)";
+    else if (in_array("unique", $settings))
+      $append .= "ALTER TABLE {$this->Table($path)} ADD UNIQUE ($path->field)";
+
+    if (in_array("increment", $settings))
+      $type = "serial";
+
+
+    \db::SafeQuery("ALTER TABLE {$this->Table($path)}
+      ADD COLUMN {$path->field} {$type}");
+    \db::SafeQuery($append);
   }
 
   public function ExistKey($path)

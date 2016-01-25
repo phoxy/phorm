@@ -2,6 +2,15 @@
 
 class AbstractTranslate
 {
+  static public $types =
+  [
+    "integer",
+    "decimal",
+    "float",
+    "varchar",
+    "datetime",
+  ];
+
   public function ExistDatabase($settings)
   {
 
@@ -14,7 +23,7 @@ class AbstractTranslate
 
   public function ExistTable($settings)
   {
-    
+
   }
 
   public function CreateTable($settings)
@@ -24,7 +33,7 @@ class AbstractTranslate
 
   public function ExistField($settings)
   {
-    
+
   }
 
   public function CreateField($settings)
@@ -34,7 +43,7 @@ class AbstractTranslate
 
   public function ExistKey($settings)
   {
-    
+
   }
 
   public function CreateKey($settings)

@@ -43,6 +43,11 @@ class recursivepath
 
   public function __toString()
   {
-    return implode(".", $this->path);
+    return $this->get();
+  }
+
+  public function get($delimeter = ".")
+  {
+    return implode($delimeter, $this->path);
   }
 }

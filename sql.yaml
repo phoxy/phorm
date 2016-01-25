@@ -4,11 +4,11 @@ database:
         - book:
             field:
               - id:
-                - integer
-                - primary
-                - unique
-                - increment
+                  - integer
+                  - primary
+                  - unique
+                  - increment
               - title:
-                - varchar:
-                    max: 255
-                - notnull
+                  - varchar:
+                      max: 255
+                  - notnull

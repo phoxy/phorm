@@ -28,12 +28,16 @@ class recursivepath
 
   public function update($val)
   {
-    $key = end($this->hole);
-    $this->path[$key] = $val;
+    $this->path[end($this->hole)] = $val;
   }
 
   public function __debugInfo()
   {
     return $this->path;
+  }
+
+  public function __get($name)
+  {
+    return $this->path[$name];
   }
 }

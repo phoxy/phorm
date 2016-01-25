@@ -6,20 +6,20 @@ class database extends AbstractObject
 {
   public function Init($name, $yaml, $path)
   {    
-    if (!$this->Exist($name))
-      $this->Create($name, $yaml, $path);
+    if (!$this->Exist($path))
+      $this->Create($path, $yaml);
   }
 
-  public function Exist($name)
+  public function Exist($path)
   {
-    return $this->con()->ExistDatabase($name);
+    return $this->con()->ExistDatabase($path);
   }
 
-  public function Create($name, $yaml, $path)
+  public function Create($path, $yaml)
   {
-    $this->con()->CreateDatabase($name, $yaml);
-    if (!$this->Exist($name))
-      throw "Failed to create $name database";
+    $this->con()->CreateDatabase($path, $yaml);
+    if (!$this->Exist($path))
+      die("Failed to create {$path->database} database");
   }
 
   public function CanRecursive()

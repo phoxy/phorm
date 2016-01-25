@@ -1,7 +1,7 @@
 <?php namespace orm;
 
 include('vendor/enelar/phpsql/oneline.php');
-\phpsql\OneLineConfig("pgsql://postgres@localhost");
+\phpsql\OneLineConfig("pgsql://postgres@localhost/firstdb");
 
 include('vendor/autoload.php');
 

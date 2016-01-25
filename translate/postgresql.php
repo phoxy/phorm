@@ -23,26 +23,25 @@ class postgresql
     $table = $path->table;
 
     $ret = \db::Query("SELECT EXISTS (
-        SELECT 1 
+        SELECT 1
         FROM   pg_catalog.pg_class c
         JOIN   pg_catalog.pg_namespace n ON n.oid = c.relnamespace
         WHERE  n.nspname = $1
         AND    c.relname = $2
         AND    c.relkind = 'r'    -- only tables(?)
         )", [$schema, $table], true);
-    
+
     return $res->exists == 't';
   }
 
   public function CreateTable($path, $settings)
   {
-    \db::Query("CREATE TABLE {$path->table}");
-    die('create table');
+    \db::Query("CREATE TABLE {$path->table}()");
   }
 
   public function ExistField($path)
   {
-    
+
   }
 
   public function CreateField($path, $settings)
@@ -52,7 +51,7 @@ class postgresql
 
   public function ExistKey($path)
   {
-    
+
   }
 
   public function CreateKey($path, $settings)

@@ -15,8 +15,8 @@ class recursivepath
   {
     if (isset($this->hole[$direction]))
       die("Cannot dig path to $direction. Already was there");
-    
-    $this->path[$direction] = 'path_dummy'; 
+
+    $this->path[$direction] = 'path_dummy';
     array_push($this->hole, $direction);
   }
 
@@ -39,5 +39,10 @@ class recursivepath
   public function __get($name)
   {
     return $this->path[$name];
+  }
+
+  public function __toString()
+  {
+    return implode(".", $this->path);
   }
 }
